@@ -6,29 +6,27 @@ const populate = async function () {
 
     try {
 
-        const obtengoDogs = await Dog.findAll();
+        const obtengoPerros = await Dog.findAll();
 
-        //console.log(obtengoDogs);
+        if (obtengoPerros.length === 0) {
 
-        if (obtengoDogs.length === 0) {
+            const perros = await axios.get("https://api.thedogapi.com/v1/breeds");
 
-            const dogs = await axios.get("https://api.thedogapi.com/v1/breeds");
-
-            const dogsMapeados = dogs.data.map(dog => {
+            const perrosMapeados = perros.data.map(perro => {
 
                 return {
-                    id: dog.id,
-                    nombre: dog.name,
-                    altura: dog.height.imperial,
-                    peso: dog.weight.imperial,
-                    AñosDeVida: dog.life_span
+                    id: perro.id,
+                    name: perro.name,
+                    altura: perro.height.metric,
+                    peso: perro.weight.metric,
+                    AñosDeVida: perro.life_span
                 }
 
             })
 
             try {
-                const dogsGuardados = await Dog.bulkCreate(dogsMapeados);
-                console.log(dogsMapeados);
+                const perrosGuardados = await Dog.bulkCreate(perrosMapeados);
+                //console.log(perrosGuardados);
             } catch (error) {
                 console.log("guardando perros", error);
             }

@@ -10,20 +10,20 @@ module.exports = (sequelize) => {
       allowNull: false,
       primaryKey: true
     },
-    nombre: {
+    name: {
       type: DataTypes.STRING,
       allowNull: false
     },
     altura: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false
     },
     peso: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false
     },
     AñosDeVida: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
     }
   });
 };

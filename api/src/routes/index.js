@@ -1,5 +1,7 @@
+const { json } = require('body-parser');
 const { Router } = require('express');
 const { Dog, Temperamento } = require("../db");
+const axios = require("axios");
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 
@@ -14,27 +16,25 @@ router.get("/dogs", async (req, res) => {
     const name = req.query.name;
 
     if (name) {
-
         const dog = await Dog.findAll({
             where: { name: name }
         });
 
         if (dog.length === 0) {
-            return res.status(404).send("Dog not found")
+            return res.status(404).send("dog not found")
         }
 
         res.json(dog)
     }
 
     else {
-
         const dogs = await Dog.findAll();
 
         if (dogs.length !== 0) {
             return res.json(dogs);
         };
 
-        res.status(404).send("Los perros no existen");
+        res.status(404).send("dogs not found");
     }
 
 });
@@ -59,7 +59,7 @@ router.post("/dogs", async (req, res) => {
 
     const { id, nombre, altura, peso, AñosDeVida } = req.body;
 
-    if (!nombre || !altura || !peso || !AñosDeVida) {
+    if (!id, !nombre || !altura || !peso || !AñosDeVida) {
         return res.status(404).send("Falta enviar datos obligatorios");
     }
 
@@ -74,13 +74,35 @@ router.post("/dogs", async (req, res) => {
 
 router.get("/temperaments", async (req, res) => {
 
-    const temperamentos = await Temperamento.findAll();
+    try {
 
-    if (temperamentos.length !== 0) {
-        return res.json(temperamentos);
-    };
+        const temperamentos = await axios.get("https://api.thedogapi.com/v1/breeds");
 
-    res.status(404).send("Temperamentos no encontrados");
+        //console.log(temperamentos);
+
+        let everyTemperament = temperamentos.data.map(dog => dog.temperament ? dog.temperament : "No info").map(dog => dog?.split(', '));
+
+        //console.log(everyTemperament);
+
+        let eachTemperament = [...new Set(everyTemperament.flat())];
+
+        eachTemperament.forEach(el => {
+            if (el) {
+                Temperamento.findOrCreate({
+                    where: { name: el }
+                });
+            }
+        });
+
+        //const tempe = await Temperamento.findAll();
+
+        //console.log(tempe);
+
+        res.status(200).json(eachTemperament);
+
+    } catch {
+        res.status(404).send("temperamentos no encontrados");
+    }
 
 });
 
