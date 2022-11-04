@@ -24,6 +24,12 @@ module.exports = (sequelize) => {
     },
     AñosDeVida: {
       type: DataTypes.STRING,
+    },
+    img: {
+      type: DataTypes.STRING,
+    },
+    temperamento: {
+      type: DataTypes.STRING,
     }
   });
 };

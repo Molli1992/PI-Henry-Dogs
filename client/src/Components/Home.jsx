@@ -59,7 +59,7 @@ export default function Home(props) {
                     return (
 
                         <Link to={"/home/" + dog.name}>
-                            <HomeCard img={""} nombre={""} temperamento={""} />
+                            <HomeCard img={dog.img} name={dog.name} temperamento={dog.temperamento} />
                         </Link>
 
                     )

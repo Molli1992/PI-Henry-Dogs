@@ -7,15 +7,15 @@ function HomeCard(props) {
             <ul>
 
                 <li>
-                    Img:
+                    Img: {props.img}
                 </li>
 
                 <li>
-                    Nombre:
+                    Name: {props.name}
                 </li>
 
                 <li>
-                    Temperamento:
+                    Temperamento: {props.temperamento}
                 </li>
 
             </ul>

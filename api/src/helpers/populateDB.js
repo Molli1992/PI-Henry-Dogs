@@ -19,7 +19,9 @@ const populate = async function () {
                     name: perro.name,
                     altura: perro.height.metric,
                     peso: perro.weight.metric,
-                    AñosDeVida: perro.life_span
+                    AñosDeVida: perro.life_span,
+                    img: perro.image.url,
+                    temperamento: perro.temperament
                 }
 
             })
@@ -43,3 +45,5 @@ const populate = async function () {
 module.exports = {
     populate: populate
 }
+
+//weight

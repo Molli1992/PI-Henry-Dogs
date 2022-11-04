@@ -43,8 +43,8 @@ router.get("/dogs/:id", async (req, res) => {
 
     const { id } = req.params;
 
-    const dog = await Dog.findByPk(id, {
-        include: Temperamento
+    const dog = await Dog.findAll({
+        where: { name: id }
     });
 
     if (dog) {
