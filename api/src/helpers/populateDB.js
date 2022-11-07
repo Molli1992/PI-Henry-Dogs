@@ -28,7 +28,7 @@ const populate = async function () {
 
             try {
                 const perrosGuardados = await Dog.bulkCreate(perrosMapeados);
-                //console.log(perrosGuardados);
+                console.log(perrosGuardados);
             } catch (error) {
                 console.log("guardando perros", error);
             }
@@ -45,5 +45,3 @@ const populate = async function () {
 module.exports = {
     populate: populate
 }
-
-//weight

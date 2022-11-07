@@ -18,6 +18,44 @@ export default function Home(props) {
 
     const dogs = useSelector((state) => state.dogs);
 
+    var ITEMS_PER_PAGE = 8;
+
+    const [datosFromApi, setDatosFromApi] = useState(dogs);
+
+    const [items, setItems] = useState([...dogs].splice(0, ITEMS_PER_PAGE));
+
+    const [currentPage, serCurrentPage] = useState(0);
+
+    const nextHandler = () => {
+
+        const totalElementos = datosFromApi.length;
+
+        const nextPage = currentPage + 1;
+
+        const firstIndex = nextPage * ITEMS_PER_PAGE;
+
+        //ITEMS_PER_PAGE = ITEMS_PER_PAGE + 10;
+
+        if (firstIndex === totalElementos) return;
+
+        setItems([...datosFromApi].splice(firstIndex, ITEMS_PER_PAGE))
+        serCurrentPage(nextPage);
+
+    };
+
+    const prevHandler = () => {
+
+        const prevPage = currentPage - 1;
+
+        if (prevPage < 0) return;
+
+        const firstIndex = prevPage * ITEMS_PER_PAGE;
+
+        setItems([...datosFromApi].splice(firstIndex, ITEMS_PER_PAGE))
+        serCurrentPage(prevPage);
+
+    };
+
     const [state, setState] = useState({
         nombre: ""
     });
@@ -31,9 +69,17 @@ export default function Home(props) {
 
     };
 
+
     return (
 
         <div>
+
+            <div>Pagina: {currentPage}</div>
+
+            <div>
+                <button onClick={prevHandler}>Prev</button>
+                <button onClick={nextHandler}>Next</button>
+            </div>
 
             <div >
                 <Link to="/form">
@@ -53,7 +99,7 @@ export default function Home(props) {
 
             {
 
-                dogs && dogs.map((dog) => {
+                items && items.map((dog) => {
 
 
                     return (
