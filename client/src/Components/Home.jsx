@@ -4,6 +4,8 @@ import HomeCard from './HomeCard';
 import { Link } from 'react-router-dom';
 import { getDogs } from "../Actions/index";
 import { useDispatch, useSelector } from "react-redux";
+import FilterTemp from './FilterTemp';
+import FilterRaza from './FilterRaza';
 
 
 export default function Home(props) {
@@ -36,7 +38,7 @@ export default function Home(props) {
 
         //ITEMS_PER_PAGE = ITEMS_PER_PAGE + 10;
 
-        if (firstIndex === totalElementos) return;
+        if (nextPage > 21) return;
 
         setItems([...datosFromApi].splice(firstIndex, ITEMS_PER_PAGE))
         serCurrentPage(nextPage);
@@ -97,6 +99,9 @@ export default function Home(props) {
 
             </div>
 
+            <FilterTemp />
+            <FilterRaza />
+
             {
 
                 items && items.map((dog) => {
@@ -105,7 +110,7 @@ export default function Home(props) {
                     return (
 
                         <Link to={"/home/" + dog.name}>
-                            <HomeCard img={dog.img} name={dog.name} temperamento={dog.temperamento} />
+                            <HomeCard key={dog.name} img={dog.img} name={dog.name} temperamento={dog.temperamento} />
                         </Link>
 
                     )

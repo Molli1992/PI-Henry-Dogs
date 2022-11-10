@@ -3,7 +3,7 @@ import React from 'react';
 
 function HomeCard(props) {
     return (
-        <article className="card">
+        <article key={props.name} className="card">
             <ul>
 
                 <li>

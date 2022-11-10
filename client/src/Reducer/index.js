@@ -1,9 +1,10 @@
-import { GET_DOGS, GET_DOGS_DETAIL } from "../Actions/index";
+import { GET_DOGS, GET_DOGS_DETAIL, GET_TEMPERAMENTS } from "../Actions/index";
 
 
 const initialState = {
     dogs: [],
-    dogsDetail: {}
+    dogsDetail: {},
+    temperaments: []
 };
 
 
@@ -23,7 +24,13 @@ function rootReducer(state = initialState, action) {
         };
     };
 
-    return state;
+    if (action.type === GET_TEMPERAMENTS) {
+        return {
+            ...state,
+            temperaments: action.payload
+        }
+    };
+
 
 };
 
