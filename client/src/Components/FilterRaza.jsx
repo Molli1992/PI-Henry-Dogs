@@ -13,7 +13,7 @@ export default function FilterRaza() {
 
     }, [dispatch]);
 
-    const dogs = useSelector((state) => state.dogs);
+    const dogs = useSelector((state) => state?.dogs);
 
     return (
         <div>

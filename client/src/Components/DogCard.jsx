@@ -1,4 +1,5 @@
 import "./DogCard.css";
+import { Link } from "react-router-dom";
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
@@ -18,47 +19,71 @@ export default function DogCard() {
 
     }, [dispatch]);
 
-    const dog = useSelector((state) => state.dogsDetail);
+    const dog = useSelector((state) => state?.dogsDetail);
 
-    console.log(dog);
+    if (Array.isArray(dog)) {
+
+        console.log(dog);
+
+        return (
+
+            <div>
+
+                <article className="card">
+
+                    <div className="card-header">
+                        <img src={dog[0].img} />
+                    </div>
+
+                    <div>
+
+                        <ul>
+
+                            <li>
+                                <span>Name: </span>
+                                {dog[0].name}
+                            </li>
+
+                            <li>
+                                <span>Temperamento: </span>
+                                {dog[0].temperamento}
+                            </li>
+
+                            <li>
+                                <span>Peso: </span>
+                                {dog[0].peso}
+                            </li>
+
+                            <li>
+                                <span>Altura: </span>
+                                {dog[0].altura}
+                            </li>
+
+                            <li>
+                                <span>Años de vida: </span>
+                                {dog[0].AñosDeVida}
+                            </li>
+
+                        </ul>
 
 
-    return (
+                    </div>
 
-        <div>
 
-            <article className="card">
+                </article>
 
-                <ul>
-                    <li>
-                        Img: {dog[0].img}
-                    </li>
+                <div>
+                    <Link to="/home">
+                        <button className='button-home'>Home</button>
+                    </Link>
+                </div>
 
-                    <li>
-                        Name: {dog[0].name}
-                    </li>
+            </div>
 
-                    <li>
-                        Temperamento: {dog[0].temperamento}
-                    </li>
+        )
 
-                    <li>
-                        Peso: {dog[0].peso}
-                    </li>
-
-                    <li>
-                        Altura: {dog[0].altura}
-                    </li>
-
-                    <li>
-                        Años de vida: {dog[0].AñosDeVida}
-                    </li>
-
-                </ul>
-
-            </article>
-
-        </div>
-
+    } else return (
+        <div>Dog not foound</div>
     )
+
 };

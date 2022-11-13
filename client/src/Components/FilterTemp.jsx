@@ -13,7 +13,7 @@ export default function FilterTemp() {
 
     }, [dispatch]);
 
-    const temperaments = useSelector((state) => state.temperaments);
+    const temperaments = useSelector((state) => state?.temperaments);
 
     const handleDelete = (e) => {
         window.location.reload(true);

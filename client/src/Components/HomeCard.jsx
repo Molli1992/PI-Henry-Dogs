@@ -4,21 +4,31 @@ import React from 'react';
 function HomeCard(props) {
     return (
         <article key={props.name} className="card">
-            <ul>
 
-                <li>
-                    Img: {props.img}
-                </li>
+            <div className="card-header">
+                <img src={props.img} />
+            </div>
 
-                <li>
-                    Name: {props.name}
-                </li>
+            <div className="card-info">
+                <ul>
 
-                <li>
-                    Temperamento: {props.temperamento}
-                </li>
+                    <li>
+                        <span>
+                            Name:
+                        </span>
+                        {props.name}
+                    </li>
 
-            </ul>
+                    <li>
+                        <span>
+                            Temperamento:
+                        </span>
+                        {props.temperamento}
+                    </li>
+
+                </ul>
+            </div>
+
         </article>
     )
 }
