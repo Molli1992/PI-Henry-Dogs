@@ -12,7 +12,8 @@ export default function Home(props) {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getDogs())
+        dispatch(getDogs());
+
     }, [dispatch]);
 
 
@@ -28,19 +29,16 @@ export default function Home(props) {
 
     var nextHandler;
     var prevHandler;
-    var handleSearchTemperamento;
-    var handleSearchRaza;
+    var handleSearchNombre;
     var results;
 
     const [datosFromApi, setDatosFromApi] = useState("");
 
     const [items, setItems] = useState("");
 
-    const [currentPage, serCurrentPage] = useState(1);
+    const [currentPage, serCurrentPage] = useState(0);
 
-    const [searchTemperamento, setSearchTemperamento] = useState("");
-
-    const [searchRaza, setSearchRaza] = useState("");
+    const [searchNombre, setSearchNombre] = useState("");
 
     if (Array.isArray(allDogs) && allDogs.length) {
 
@@ -68,7 +66,7 @@ export default function Home(props) {
 
             const prevPage = currentPage - 1;
 
-            if (prevPage < 1) return;
+            if (prevPage < 0) return;
 
             const firstIndex = prevPage * ITEMS_PER_PAGE;
 
@@ -77,33 +75,22 @@ export default function Home(props) {
 
         };
 
-        handleSearchTemperamento = (e) => {
-            setSearchTemperamento(e.target.value);
-            console.log(e.target.value)
-        };
-
-        handleSearchRaza = (e) => {
-            setSearchRaza(e.target.value);
+        handleSearchNombre = (e) => {
+            setSearchNombre(e.target.value);
             console.log(e.target.value)
         };
 
         results = [];
 
-        if (!searchTemperamento && !searchRaza) {
+        if (!searchNombre) {
             results = items;
-        } else if (searchTemperamento) {
+        } else if (searchNombre) {
             results = items.filter((dato) => {
-                return dato.temperamento.toLowerCase().includes(searchTemperamento.toLowerCase())
+                return dato.name.toLowerCase().includes(searchNombre.toLowerCase())
             })
-        } else {
-            results = items.filter((dato) => {
-                return dato.name.toLowerCase().includes(searchRaza.toLowerCase())
-            })
+            console.log(results);
         }
-
-
-
-    }
+    };
 
     return (
 
@@ -126,9 +113,7 @@ export default function Home(props) {
 
                 <div>
                     <label>Busca tu perro</label>
-                    <input placeholder='busca por temperamento'
-                        onChange={handleSearchTemperamento} />
-                    <input placeholder='busca por raza' onChange={handleSearchRaza} />
+                    <input placeholder='busca por nombre' onChange={handleSearchNombre} />
                 </div>
 
             </div>
@@ -144,7 +129,8 @@ export default function Home(props) {
                     return (
 
                         <Link to={"/home/" + dog.name}>
-                            <HomeCard key={dog.name} img={dog.img} name={dog.name} temperamento={dog.temperamento} />
+                            <HomeCard key={dog.name} img={dog.img} name={dog.name}
+                                temperamento={dog.temperamento} />
                         </Link>
 
                     )

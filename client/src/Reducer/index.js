@@ -1,4 +1,6 @@
-import { GET_DOGS, GET_DOGS_DETAIL, GET_TEMPERAMENTS } from "../Actions/index";
+import {
+    GET_DOGS, GET_DOGS_DETAIL, GET_TEMPERAMENTS
+} from "../Actions/index";
 
 
 const initialState = {
@@ -30,7 +32,6 @@ function rootReducer(state = initialState, action) {
             temperaments: action.payload
         }
     };
-
 
 };
 
