@@ -64,7 +64,8 @@ router.post("/dogs", async (req, res) => {
     }
 
     try {
-        const dog = await Dog.create(req.body)
+        const dog = await Dog.bulkCreate(req.body)
+        console.log(dog);
         res.status(201).json(dog);
     } catch (error) {
         res.status(404).send("Error en alguno de los datos provistos");
@@ -78,11 +79,7 @@ router.get("/temperaments", async (req, res) => {
 
         const temperamentos = await axios.get("https://api.thedogapi.com/v1/breeds");
 
-        //console.log(temperamentos);
-
         let everyTemperament = temperamentos.data.map(dog => dog.temperament ? dog.temperament : "No info").map(dog => dog?.split(', '));
-
-        //console.log(everyTemperament);
 
         let eachTemperament = [...new Set(everyTemperament.flat())];
 
@@ -93,10 +90,6 @@ router.get("/temperaments", async (req, res) => {
                 });
             }
         });
-
-        //const tempe = await Temperamento.findAll();
-
-        //console.log(tempe);
 
         res.status(200).json(eachTemperament);
 
