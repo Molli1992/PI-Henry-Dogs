@@ -18,9 +18,12 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false
     },
-    peso: {
+    peso_min: {
       type: DataTypes.STRING,
       allowNull: false
+    },
+    peso_max: {
+      type: DataTypes.STRING,
     },
     AñosDeVida: {
       type: DataTypes.STRING,

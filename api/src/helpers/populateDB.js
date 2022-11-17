@@ -18,7 +18,10 @@ const populate = async function () {
                     id: perro.id,
                     name: perro.name,
                     altura: perro.height.metric,
-                    peso: perro.weight.metric,
+                    peso_min: perro.weight.metric.split(" - ")[0] &&
+                        perro.weight.metric.split(" - ")[0],
+                    peso_max: perro.weight.metric.split(" - ")[1] &&
+                        perro.weight.metric.split(" - ")[1],
                     AñosDeVida: perro.life_span,
                     img: perro.image.url,
                     temperamento: perro.temperament

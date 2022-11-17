@@ -57,9 +57,9 @@ router.get("/dogs/:id", async (req, res) => {
 
 router.post("/dogs", async (req, res) => {
 
-    const { id, nombre, altura, peso, AñosDeVida } = req.body;
+    const { id, nombre, altura, peso_min, peso_max, AñosDeVida } = req.body;
 
-    if (!id, !nombre || !altura || !peso || !AñosDeVida) {
+    if (!id, !nombre || !altura || !peso_min || !peso_max || !AñosDeVida) {
         return res.status(404).send("Falta enviar datos obligatorios");
     }
 
@@ -71,6 +71,8 @@ router.post("/dogs", async (req, res) => {
     }
 
 });
+
+
 
 router.get("/temperaments", async (req, res) => {
 

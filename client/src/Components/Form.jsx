@@ -21,10 +21,16 @@ function validate(input) {
         errors.altura = 'altura incorrecta';
     }
 
-    if (!input.peso) {
-        errors.peso = 'se requiere peso';
-    } else if (!/\S+\S+\.\S+/.test(input.peso)) {
-        errors.peso = 'peso incorrecto';
+    if (!input.pesoMin) {
+        errors.pesoMin = 'se requiere peso';
+    } else if (!/\S+\S+\.\S+/.test(input.pesoMin)) {
+        errors.pesoMin = 'peso incorrecto';
+    }
+
+    if (!input.pesoMax) {
+        errors.pesoMax = 'se requiere peso';
+    } else if (!/\S+\S+\.\S+/.test(input.pesoMax)) {
+        errors.pesoMax = 'peso incorrecto';
     }
 
     if (!input.AñosDeVida) {
@@ -41,7 +47,8 @@ export default function Form() {
     const [input, setInput] = React.useState({
         nombre: "",
         altura: "",
-        peso: "",
+        pesoMin: "",
+        pasoMax: "",
         AñosDeVida: ""
     });
 
@@ -87,10 +94,17 @@ export default function Form() {
             </div>
 
             <div>
-                <label>Peso:</label>
-                <input type="text" name="peso" value={input.peso} onChange={handleInputChange}
-                    className={errors.peso && 'danger'} />
-                {errors.peso && (<p className="danger">{errors.peso}</p>)}
+                <label>Peso Min:</label>
+                <input type="text" name="pesoMin" value={input.pesoMin} onChange={handleInputChange}
+                    className={errors.pesoMin && 'danger'} />
+                {errors.pesoMin && (<p className="danger">{errors.pesoMin}</p>)}
+            </div>
+
+            <div>
+                <label>Peso Max:</label>
+                <input type="text" name="pesoMax" value={input.pesoMax} onChange={handleInputChange}
+                    className={errors.pesoMax && 'danger'} />
+                {errors.pesoMax && (<p className="danger">{errors.pesoMax}</p>)}
             </div>
 
             <div>

@@ -50,8 +50,13 @@ export default function DogCard() {
                             </li>
 
                             <li>
-                                <span>Peso: </span>
-                                {dog[0].peso}
+                                <span>Peso Min: </span>
+                                {dog[0].peso_min}
+                            </li>
+
+                            <li>
+                                <span>Peso Max: </span>
+                                {dog[0].peso_max}
                             </li>
 
                             <li>

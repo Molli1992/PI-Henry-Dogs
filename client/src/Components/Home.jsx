@@ -2,23 +2,24 @@ import { useEffect, useState } from 'react';
 import "./Home.css";
 import HomeCard from './HomeCard';
 import { Link } from 'react-router-dom';
-import { getDogs } from "../Actions/index";
+import { getDogs, getTemperaments } from "../Actions/index";
 import { useDispatch, useSelector } from "react-redux";
-import FilterRaza from './FilterRaza';
-import FilterTemp from './FilterTemp';
 
 export default function Home(props) {
 
     const dispatch = useDispatch();
 
     useEffect(() => {
+
         dispatch(getDogs());
+        dispatch(getTemperaments())
 
     }, [dispatch]);
 
 
 
     const allDogs = useSelector((state) => state?.dogs);
+    const temperaments = useSelector((state) => state?.temperaments);
 
     useEffect(() => {
         if (allDogs && allDogs.length) {
@@ -30,7 +31,14 @@ export default function Home(props) {
     var nextHandler;
     var prevHandler;
     var handleSearchNombre;
+    var handleFilterRaza;
+    var handleFilterTemp;
     var results;
+    var handleSortAsc;
+    var handleSortDes;
+    var handleDelete;
+    var handleSortWeigth;
+
 
     const [datosFromApi, setDatosFromApi] = useState("");
 
@@ -39,6 +47,10 @@ export default function Home(props) {
     const [currentPage, serCurrentPage] = useState(0);
 
     const [searchNombre, setSearchNombre] = useState("");
+
+    const [filterRaza, setFilterRaza] = useState("");
+
+    const [filterTemp, setFilterTemp] = useState("");
 
     if (Array.isArray(allDogs) && allDogs.length) {
 
@@ -76,21 +88,98 @@ export default function Home(props) {
         };
 
         handleSearchNombre = (e) => {
-            setSearchNombre(e.target.value);
+            setSearchNombre(e.target.value)
             console.log(e.target.value)
         };
 
+        handleFilterRaza = (e) => {
+            setFilterRaza(e.target.value)
+            console.log(e.target.value)
+        };
+
+        handleFilterTemp = (e) => {
+            setFilterTemp(e.target.value)
+            console.log(e.target.value)
+        };
+
+
+
+        handleSortDes = (e) => {
+            setItems([...datosFromApi].sort((a, b) => {
+
+                if (a.name.toLowerCase() > b.name.toLowerCase()) {
+                    return -1;
+                }
+                if (b.name.toLowerCase() > a.name.toLowerCase()) {
+                    return 1;
+                }
+                return 0;
+            }))
+            console.log(items);
+        };
+
+
+
+
+        handleSortAsc = (e) => {
+            setItems([...datosFromApi].sort((a, b) => {
+
+                if (a.name.toLowerCase() > b.name.toLowerCase()) {
+                    return 1;
+                }
+                if (b.name.toLowerCase() > a.name.toLowerCase()) {
+                    return -1;
+                }
+                return 0;
+            }))
+            console.log(items);
+        };
+
+        handleSortWeigth = (e) => {
+            setItems([...datosFromApi].sort((a, b) => {
+
+                if (a.peso_min > b.peso_min) {
+                    return 1;
+                }
+                if (b.peso_min > a.peso_min) {
+                    return -1;
+                }
+                return 0;
+            }))
+            console.log(items);
+        };
+
+        handleDelete = (e) => {
+            window.location.reload(true);
+        };
+
+
         results = [];
 
-        if (!searchNombre) {
-            results = items;
+        if (filterTemp) {
+            results = items.filter((dato) => {
+                return dato.temperamento.toLowerCase().includes(filterTemp.toLowerCase())
+            })
+            console.log(results);
+        } else if (filterRaza) {
+            results = items.filter((dato) => {
+                return dato.name.toLowerCase().includes(filterRaza.toLowerCase())
+            })
+            console.log(results);
         } else if (searchNombre) {
             results = items.filter((dato) => {
                 return dato.name.toLowerCase().includes(searchNombre.toLowerCase())
             })
             console.log(results);
+        } else if (!searchNombre) {
+            results = items;
+            console.log(results);
         }
+
     };
+
+
+
 
     return (
 
@@ -113,13 +202,46 @@ export default function Home(props) {
 
                 <div>
                     <label>Busca tu perro</label>
-                    <input placeholder='busca por nombre' onChange={handleSearchNombre} />
+                    <input placeholder='busca por nombre' name='search'
+                        onChange={handleSearchNombre} />
+                    <button>Search</button>
                 </div>
 
             </div>
 
-            <FilterRaza />
-            <FilterTemp />
+            <select onClick={handleFilterRaza}>
+
+                <option>Razas</option>
+
+                {allDogs && allDogs.map((raza) => {
+                    return (
+                        <option key={raza.name}>
+                            {raza.name}
+                        </option>
+                    );
+                })}
+
+            </select>
+
+            <select onClick={handleFilterTemp}>
+
+                <option>Temperaments</option>
+
+                {temperaments && temperaments.map((temp) => {
+                    return (
+                        <option key={temp}>
+                            {temp}
+                        </option>
+                    );
+                })}
+
+            </select>
+
+            <button onClick={handleSortAsc}>Ascendente</button>
+            <button onClick={handleSortDes}>Descendente</button>
+            <button onClick={handleSortWeigth}>Order by Weigth</button>
+
+            <button onClick={handleDelete}>Refresh</button>
 
             {
 

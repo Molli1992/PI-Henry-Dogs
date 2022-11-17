@@ -1,6 +1,11 @@
+import axios from "axios";
 export const GET_DOGS = "GET_DOGS";
 export const GET_DOGS_DETAIL = "GET_DOGS_DETAIL";
 export const GET_TEMPERAMENTS = "GET_TEMPERAMENTS";
+export const ORDER_BY_NAME = "ORDER_BY_NAME";
+export const ORDER_BY_WEIGHT = "ORDER_BY_WEIGHT";
+export const GET_DOGS_BY_NAME = "GET_DOGS_BY_NAME";
+
 
 
 export function getDogs() {
