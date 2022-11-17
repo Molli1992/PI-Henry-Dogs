@@ -22,21 +22,27 @@ function validate(input) {
     }
 
     if (!input.pesoMin) {
-        errors.pesoMin = 'se requiere peso';
+        errors.pesoMin = 'se requiere peso min';
     } else if (!/\S+\S+\.\S+/.test(input.pesoMin)) {
-        errors.pesoMin = 'peso incorrecto';
+        errors.pesoMin = 'peso min incorrecto';
     }
 
     if (!input.pesoMax) {
-        errors.pesoMax = 'se requiere peso';
+        errors.pesoMax = 'se requiere peso max';
     } else if (!/\S+\S+\.\S+/.test(input.pesoMax)) {
-        errors.pesoMax = 'peso incorrecto';
+        errors.pesoMax = 'peso max incorrecto';
     }
 
     if (!input.AñosDeVida) {
         errors.AñosDeVida = 'se requieren los Años De Vida';
     } else if (!/\S+\S+\.\S+/.test(input.AñosDeVida)) {
         errors.AñosDeVida = 'Años de vida incorrectos';
+    }
+
+    if (!input.temperamento) {
+        errors.temperamento = 'se requiere temperamento';
+    } else if (!/\S+\S+\.\S+/.test(input.temperamento)) {
+        errors.temperamento = 'temperamento incorrecto';
     }
 
     return errors;
@@ -49,7 +55,8 @@ export default function Form() {
         altura: "",
         pesoMin: "",
         pasoMax: "",
-        AñosDeVida: ""
+        AñosDeVida: "",
+        temperamento: ""
     });
 
     const [errors, setErrors] = React.useState({});
@@ -112,6 +119,13 @@ export default function Form() {
                 <input type="text" name="AñosDeVida" value={input.AñosDeVida} onChange={handleInputChange}
                     className={errors.AñosDeVida && 'danger'} />
                 {errors.AñosDeVida && (<p className="danger">{errors.AñosDeVida}</p>)}
+            </div>
+
+            <div>
+                <label>Temperamento:</label>
+                <input type="text" name="temperamento" value={input.temperamento} onChange={handleInputChange}
+                    className={errors.temperamento && 'danger'} />
+                {errors.temperamento && (<p className="danger">{errors.temperamento}</p>)}
             </div>
 
             <button onClick={handleSubmit}>Enviar</button>
