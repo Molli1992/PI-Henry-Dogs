@@ -151,10 +151,13 @@ export default function Home(props) {
 
             allDogs.sort((a, b) => {
 
-                if (a.peso_min.toLowerCase() > b.peso_min.toLowerCase()) {
+                const pesoA = (+a.peso_max + +a.peso_min);
+                const pesoB = (+b.peso_max + +b.peso_min);
+
+                if (pesoA > pesoB) {
                     return 1;
                 }
-                if (b.peso_min.toLowerCase() > a.peso_min.toLowerCase()) {
+                if (pesoB > pesoA) {
                     return -1;
                 }
                 return 0;
@@ -185,80 +188,105 @@ export default function Home(props) {
 
         <div>
 
-            <div>Pagina: {currentPage}</div>
-
-            <div>
-                <button onClick={prevHandler}>Prev</button>
-                <button onClick={nextHandler}>Next</button>
+            <div className='home-banner'>
+                <h1>PI-Henry-Dogs</h1>
+                <h3>Vida Animal</h3>
             </div>
 
-            <div >
-                <Link to="/form">
-                    <button className='button-home'>Crea tu raza de perros</button>
-                </Link>
-            </div>
+            <main>
 
-            <div className='home-page'>
+                <div className='home-filters'>
 
-                <div>
-                    <label>Busca tu perro</label>
-                    <input placeholder='busca por nombre' name='search'
-                        onChange={handleSearchNombre} />
+                    <div >
+                        <Link to="/form">
+                            <button className="bgc-negro">Crea tu raza de perros</button>
+                        </Link>
+                    </div>
+
+                    <div className='home-page'>
+
+                        <div>
+                            <label>Busca tu perro</label>
+                            <input placeholder='busca por nombre' name='search'
+                                onChange={handleSearchNombre} />
+                        </div>
+
+                    </div>
+
+                    <select onClick={handleFilterRaza}>
+
+                        <option>Busca por Razas</option>
+
+                        {allDogs && allDogs.map((raza) => {
+                            return (
+                                <option key={raza.name}>
+                                    {raza.name}
+                                </option>
+                            );
+                        })}
+
+                    </select>
+
+                    <select onClick={handleFilterTemp}>
+
+                        <option>Busca por Temperamento</option>
+
+                        {temperaments && temperaments.map((temp) => {
+                            return (
+                                <option key={temp}>
+                                    {temp}
+                                </option>
+                            );
+                        })}
+
+                    </select>
+
+                    <button onClick={handleSortAsc} className="bgc-azul">
+                        Ordena de A-Z
+                    </button>
+
+                    <button onClick={handleSortDes} className="bgc-azul">
+                        Ordena de Z-A
+                    </button>
+
+                    <button onClick={handleSortWeigth} className="bgc-azul">
+                        Ordena por peso
+                    </button>
+
+                    <button onClick={handleDelete} className="bgc-verde">Refresh</button>
+
                 </div>
 
-            </div>
 
-            <select onClick={handleFilterRaza}>
+                <div className='home-cards'>
 
-                <option>Razas</option>
+                    {
 
-                {allDogs && allDogs.map((raza) => {
-                    return (
-                        <option key={raza.name}>
-                            {raza.name}
-                        </option>
-                    );
-                })}
-
-            </select>
-
-            <select onClick={handleFilterTemp}>
-
-                <option>Temperaments</option>
-
-                {temperaments && temperaments.map((temp) => {
-                    return (
-                        <option key={temp}>
-                            {temp}
-                        </option>
-                    );
-                })}
-
-            </select>
-
-            <button onClick={handleSortAsc}>Ascendente</button>
-            <button onClick={handleSortDes}>Descendente</button>
-            <button onClick={handleSortWeigth}>Order by Weigth</button>
-
-            <button onClick={handleDelete}>Refresh</button>
-
-            {
-
-                items && items.map((dog) => {
+                        items && items.map((dog) => {
 
 
-                    return (
+                            return (
 
-                        <Link to={"/home/" + dog.name}>
-                            <HomeCard key={dog.name} img={dog.img} name={dog.name}
-                                temperamento={dog.temperamento} />
-                        </Link>
+                                <Link to={"/home/" + dog.name}>
+                                    <HomeCard key={dog.name} img={dog.img} name={dog.name}
+                                        temperamento={dog.temperamento} />
+                                </Link>
 
-                    )
+                            )
 
-                })
+                        })
 
-            }
+                    }
+
+                </div>
+
+                <div className='home-paginado'>
+                    <button onClick={prevHandler} className="bgc-gris">Prev</button>
+                    {currentPage}
+                    <button onClick={nextHandler} className="bgc-gris">Next</button>
+                </div>
+
+            </main>
 
         </div>
     );

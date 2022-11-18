@@ -1,10 +1,86 @@
-.button-home {
+.home-banner {
+    height: 300px;
+    background-image: url("../img/dogs-banner.webp");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-bottom: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.home-banner h1,
+.home-banner h3 {
+    color: white;
+    text-shadow: 0px 30px 30px rgba(0, 0, 0, 0.3);
+}
+
+.home-filters {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    margin-bottom: 24px;
+    column-gap: 10px;
+    row-gap: 20px;
+    align-items: center;
+    justify-items: center;
+    text-align: center;
+}
+
+main {
+    max-width: 1024px;
+    margin: auto;
+}
+
+.home-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 20px;
+    row-gap: 40px;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.home-paginado {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+button {
     border: none;
-    background-color: white;
-    color: black;
-    text-transform: uppercase;
-    font-size: 24px;
     padding: 10px 20px;
-    border-radius: 10px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    border-radius: 11px;
+    transition: all 300ms;
+}
+
+button:hover {
+    transform: translateY(-3px);
+}
+
+button:focus {
+    transform: translateY(0px) scale(0.95);
+}
+
+.bgc-azul {
+    background-color: rgb(110, 110, 232);
+    color: white;
+}
+
+.bgc-verde {
+    background-color: rgb(108, 231, 108);
+    color: black;
+}
+
+.bgc-negro {
+    background-color: black;
+    color: white;
+}
+
+.bgc-gris {
+    background-color: lightgrey;
+    color: black;
 }

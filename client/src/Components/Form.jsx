@@ -111,66 +111,86 @@ export default function Form() {
     };
 
     return (
-        <form>
+        <div className='form-container'>
 
-            <div>
-                <label>Nombre:</label>
-                <input type="text" name="name" value={input.name} onChange={handleInputChange}
-                    className={errors.name && 'danger'} />
-                {errors.name && (<p className="danger">{errors.name}</p>)}
-            </div>
+            <form>
 
-            <div>
-                <label>Altura min:</label>
-                <input type="text" name="altura_min" value={input.altura_min} onChange={handleInputChange}
-                    className={errors.altura_min && 'danger'} />
-                {errors.altura_min && (<p className="danger">{errors.altura_min}</p>)}
-            </div>
+                <h2>Crea tu perro</h2>
 
-            <div>
-                <label>Altura max:</label>
-                <input type="text" name="altura_max" value={input.altura_max} onChange={handleInputChange}
-                    className={errors.altura_max && 'danger'} />
-                {errors.altura_max && (<p className="danger">{errors.altura_max}</p>)}
-            </div>
+                <div>
+                    <label>Nombre:</label>
+                    <div className="input-container">
+                        <input type="text" name="name" value={input.name}
+                            onChange={handleInputChange} />
+                        {errors.name && (<p className="danger">{errors.name}</p>)}
+                    </div>
+                </div>
 
-            <div>
-                <label>Peso Min:</label>
-                <input type="text" name="peso_min" value={input.peso_min} onChange={handleInputChange}
-                    className={errors.peso_min && 'danger'} />
-                {errors.peso_min && (<p className="danger">{errors.peso_min}</p>)}
-            </div>
+                <div>
+                    <label>Altura min:</label>
+                    <div className='input-container'>
+                        <input type="text" name="altura_min" value={input.altura_min}
+                            onChange={handleInputChange} />
+                        {errors.altura_min && (<p className="danger">{errors.altura_min}</p>)}
+                    </div>
+                </div>
 
-            <div>
-                <label>Peso Max:</label>
-                <input type="text" name="peso_max" value={input.peso_max} onChange={handleInputChange}
-                    className={errors.peso_max && 'danger'} />
-                {errors.peso_max && (<p className="danger">{errors.peso_max}</p>)}
-            </div>
+                <div>
+                    <label>Altura max:</label>
+                    <div className='input-container'>
+                        <input type="text" name="altura_max" value={input.altura_max}
+                            onChange={handleInputChange} />
+                        {errors.altura_max && (<p className="danger">{errors.altura_max}</p>)}
+                    </div>
+                </div>
 
-            <div>
-                <label>Años de vida:</label>
-                <input type="text" name="AñosDeVida" value={input.AñosDeVida} onChange={handleInputChange}
-                    className={errors.AñosDeVida && 'danger'} />
-                {errors.AñosDeVida && (<p className="danger">{errors.AñosDeVida}</p>)}
-            </div>
+                <div>
+                    <label>Peso Min:</label>
+                    <div className='input-container'>
+                        <input type="text" name="peso_min" value={input.peso_min}
+                            onChange={handleInputChange} />
+                        {errors.peso_min && (<p className="danger">{errors.peso_min}</p>)}
+                    </div>
+                </div>
 
-            <div>
-                <label>Temperamento:</label>
-                <input type="text" name="temperamento" value={input.temperamento} onChange={handleInputChange}
-                    className={errors.temperamento && 'danger'} />
-                {errors.temperamento && (<p className="danger">{errors.temperamento}</p>)}
-            </div>
+                <div>
+                    <label>Peso Max:</label>
+                    <div className='input-container'>
+                        <input type="text" name="peso_max" value={input.peso_max}
+                            onChange={handleInputChange} />
+                        {errors.peso_max && (<p className="danger">{errors.peso_max}</p>)}
+                    </div>
+                </div>
 
-            <button onClick={handleSubmit}>Enviar</button>
+                <div>
+                    <label>Años de vida:</label>
+                    <div className='input-container'>
+                        <input type="text" name="AñosDeVida" value={input.AñosDeVida}
+                            onChange={handleInputChange} />
+                        {errors.AñosDeVida && (<p className="danger">{errors.AñosDeVida}</p>)}
+                    </div>
+                </div>
 
-            <div >
-                <Link to="/home">
-                    <button className='button-home'>Home</button>
-                </Link>
-            </div>
+                <div>
+                    <label>Temperamento:</label>
+                    <div className='input-container'>
+                        <input type="text" name="temperamento" value={input.temperamento}
+                            onChange={handleInputChange} />
+                        {errors.temperamento && (<p className="danger">{errors.temperamento}</p>)}
+                    </div>
+                </div>
 
-        </form>
+                <div className='form-actions'>
+                    <button onClick={handleSubmit} className='button-form'>Enviar</button>
+                    <Link to="/home">
+                        <button className='button-form'>Home</button>
+                    </Link>
+                </div>
+
+            </form>
+
+        </div>
+
     );
 
 };

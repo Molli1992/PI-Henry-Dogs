@@ -27,9 +27,9 @@ export default function DogCard() {
 
         return (
 
-            <div>
+            <div className="dog-detail">
 
-                <article className="card">
+                <article className="card-detail">
 
                     <div className="card-header">
                         <img src={dog[0].img} />
@@ -84,7 +84,7 @@ export default function DogCard() {
 
                 <div>
                     <Link to="/home">
-                        <button className='button-home'>Home</button>
+                        <button className='bgc-negro'>Home</button>
                     </Link>
                 </div>
 

@@ -2,11 +2,13 @@ import "./HomeCard.css";
 import React from 'react';
 
 function HomeCard(props) {
+
+
     return (
         <article key={props.name} className="card">
 
             <div className="card-header">
-                <img src={props.img} />
+                <img src={props.img} alt="" />
             </div>
 
             <div className="card-info">

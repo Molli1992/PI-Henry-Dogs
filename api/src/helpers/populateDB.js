@@ -20,11 +20,11 @@ const populate = async function () {
                     altura_min: perro.height.metric.split(" - ")[0] &&
                         perro.height.metric.split(" - ")[0],
                     altura_max: perro.height.metric.split(" - ")[1] !== undefined ?
-                        perro.height.metric.split(" - ")[1] : "not found",
+                        perro.height.metric.split(" - ")[1] : "0",
                     peso_min: perro.weight.metric.split(" - ")[0] &&
                         perro.weight.metric.split(" - ")[0],
                     peso_max: perro.weight.metric.split(" - ")[1] !== undefined ?
-                        perro.weight.metric.split(" - ")[1] : "not found",
+                        perro.weight.metric.split(" - ")[1] : "0",
                     AñosDeVida: perro.life_span,
                     img: perro.image.url,
                     temperamento: perro.temperament
