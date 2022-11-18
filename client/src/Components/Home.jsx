@@ -158,6 +158,7 @@ export default function Home(props) {
                     return -1;
                 }
                 return 0;
+
             });
 
             const totalElementos = allDogs.length;
