@@ -6,21 +6,23 @@ module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('dog', {
     id: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false,
-      primaryKey: true
+      primaryKey: true,
+      autoIncrement: true
     },
     name: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    altura: {
+    altura_min: {
       type: DataTypes.STRING,
-      allowNull: false
+    },
+    altura_max: {
+      type: DataTypes.STRING,
     },
     peso_min: {
       type: DataTypes.STRING,
-      allowNull: false
     },
     peso_max: {
       type: DataTypes.STRING,

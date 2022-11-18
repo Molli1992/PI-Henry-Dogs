@@ -9,40 +9,66 @@ function validate(input) {
 
     let errors = {};
 
-    if (!input.nombre) {
-        errors.nombre = 'se requiere el nombre';
-    } else if (!/\S+\S+\.\S+/.test(input.nombre)) {
-        errors.nombre = 'nombre invalido';
+    if (!input.name) {
+        errors.name = 'se requiere el nombre';
+    } else if (typeof input.name !== "string") {
+        errors.name = 'nombre debe ser texto';
+    } else if (input.name.length < 4) {
+        errors.name = "debe contener al menos 4 letras"
     }
 
-    if (!input.altura) {
-        errors.altura = 'se requiere altura';
-    } else if (!/\S+\S+\.\S+/.test(input.altura)) {
-        errors.altura = 'altura incorrecta';
+    if (!input.altura_min) {
+        errors.altura_min = 'se requiere peso min';
+    } else if (isNaN(input.altura_min)) {
+        errors.altura_min = 'peso min incorrecto';
+    } else if (input.altura_min < 1) {
+        errors.altura_min = 'debe ser mayor a 0'
     }
 
-    if (!input.pesoMin) {
-        errors.pesoMin = 'se requiere peso min';
-    } else if (!/\S+\S+\.\S+/.test(input.pesoMin)) {
-        errors.pesoMin = 'peso min incorrecto';
+    if (!input.altura_max) {
+        errors.altura_max = 'se requiere peso max';
+    } else if (isNaN(input.altura_max)) {
+        errors.altura_max = 'peso max incorrecto';
+    } else if (input.altura_max >= 100) {
+        errors.altura_max = 'debe ser menor a 100'
+    } else if (input.altura_max <= 1) {
+        errors.altura_max = 'debe ser mayor a 1'
     }
 
-    if (!input.pesoMax) {
-        errors.pesoMax = 'se requiere peso max';
-    } else if (!/\S+\S+\.\S+/.test(input.pesoMax)) {
-        errors.pesoMax = 'peso max incorrecto';
+
+
+    if (!input.peso_min) {
+        errors.peso_min = 'se requiere peso min';
+    } else if (isNaN(input.peso_min)) {
+        errors.peso_min = 'peso min incorrecto';
+    } else if (input.peso_min < 1) {
+        errors.peso_min = 'debe ser mayor a 0'
+    }
+
+    if (!input.peso_max) {
+        errors.peso_max = 'se requiere peso max';
+    } else if (isNaN(input.peso_max)) {
+        errors.peso_max = 'peso max incorrecto';
+    } else if (input.peso_max >= 100) {
+        errors.peso_max = 'debe ser menor a 100'
+    } else if (input.peso_max <= 1) {
+        errors.peso_max = 'debe ser mayor a 1'
     }
 
     if (!input.AñosDeVida) {
         errors.AñosDeVida = 'se requieren los Años De Vida';
-    } else if (!/\S+\S+\.\S+/.test(input.AñosDeVida)) {
-        errors.AñosDeVida = 'Años de vida incorrectos';
+    } else if (!isNaN(input.AñosDeVida)) {
+        errors.AñosDeVida = 'Años de Vida debe ser num - num';
+    } else if (isNaN(input.AñosDeVida[0])) {
+        errors.AñosDeVida = 'Años de Vida debe ser num - num';
     }
 
     if (!input.temperamento) {
         errors.temperamento = 'se requiere temperamento';
-    } else if (!/\S+\S+\.\S+/.test(input.temperamento)) {
-        errors.temperamento = 'temperamento incorrecto';
+    } else if (typeof input.temperamento !== "string") {
+        errors.temperamento = 'temperamento debe ser texto';
+    } else if (input.temperamento.length < 4) {
+        errors.temperamento = "debe contener al menos 4 letras"
     }
 
     return errors;
@@ -51,10 +77,11 @@ function validate(input) {
 export default function Form() {
 
     const [input, setInput] = React.useState({
-        nombre: "",
-        altura: "",
-        pesoMin: "",
-        pasoMax: "",
+        name: "",
+        altura_min: "",
+        altura_max: "",
+        peso_min: "",
+        peso_max: "",
         AñosDeVida: "",
         temperamento: ""
     });
@@ -90,30 +117,37 @@ export default function Form() {
 
             <div>
                 <label>Nombre:</label>
-                <input type="text" name="nombre" value={input.nombre} onChange={handleInputChange}
-                    className={errors.nombre && 'danger'} />
-                {errors.nombre && (<p className="danger">{errors.nombre}</p>)}
+                <input type="text" name="name" value={input.name} onChange={handleInputChange}
+                    className={errors.name && 'danger'} />
+                {errors.name && (<p className="danger">{errors.name}</p>)}
             </div>
 
             <div>
-                <label>Altura:</label>
-                <input type="text" name="altura" value={input.altura} onChange={handleInputChange}
-                    className={errors.altura && 'danger'} />
-                {errors.altura && (<p className="danger">{errors.altura}</p>)}
+                <label>Altura min:</label>
+                <input type="text" name="altura_min" value={input.altura_min} onChange={handleInputChange}
+                    className={errors.altura_min && 'danger'} />
+                {errors.altura_min && (<p className="danger">{errors.altura_min}</p>)}
+            </div>
+
+            <div>
+                <label>Altura max:</label>
+                <input type="text" name="altura_max" value={input.altura_max} onChange={handleInputChange}
+                    className={errors.altura_max && 'danger'} />
+                {errors.altura_max && (<p className="danger">{errors.altura_max}</p>)}
             </div>
 
             <div>
                 <label>Peso Min:</label>
-                <input type="text" name="pesoMin" value={input.pesoMin} onChange={handleInputChange}
-                    className={errors.pesoMin && 'danger'} />
-                {errors.pesoMin && (<p className="danger">{errors.pesoMin}</p>)}
+                <input type="text" name="peso_min" value={input.peso_min} onChange={handleInputChange}
+                    className={errors.peso_min && 'danger'} />
+                {errors.peso_min && (<p className="danger">{errors.peso_min}</p>)}
             </div>
 
             <div>
                 <label>Peso Max:</label>
-                <input type="text" name="pesoMax" value={input.pesoMax} onChange={handleInputChange}
-                    className={errors.pesoMax && 'danger'} />
-                {errors.pesoMax && (<p className="danger">{errors.pesoMax}</p>)}
+                <input type="text" name="peso_max" value={input.peso_max} onChange={handleInputChange}
+                    className={errors.peso_max && 'danger'} />
+                {errors.peso_max && (<p className="danger">{errors.peso_max}</p>)}
             </div>
 
             <div>

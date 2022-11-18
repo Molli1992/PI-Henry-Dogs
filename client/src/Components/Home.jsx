@@ -90,10 +90,9 @@ export default function Home(props) {
 
         handleFilterTemp = (e) => {
             setItems([...allDogs].filter((dato) => {
-                return dato.temperamento.toLowerCase().includes(e.target.value.toLowerCase())
+                return dato?.temperamento?.toLowerCase().includes(e?.target?.value?.toLowerCase())
             }))
         };
-
 
 
         handleSortDes = (e) => {

@@ -57,14 +57,20 @@ router.get("/dogs/:id", async (req, res) => {
 
 router.post("/dogs", async (req, res) => {
 
-    const { nombre, altura, peso_min, peso_max, AñosDeVida, temperamento } = req.body;
+    const { name, altura_min, altura_max, peso_min, peso_max, AñosDeVida, temperamento } = req.body;
 
-    if (!nombre || !altura || !peso_min || !peso_max || !AñosDeVida || !temperamento) {
+    if (!name || !altura_min || !altura_max || !peso_min || !peso_max || !AñosDeVida || !temperamento) {
         return res.status(404).send("Falta enviar datos obligatorios");
     }
 
     try {
-        const dog = await Dog.bulkCreate(req.body)
+        const allDogs = await axios.get("https://api.thedogapi.com/v1/breeds");
+        const ultimoIDExterno = allDogs.data.length + 1;
+        const allDogsInternos = await Dog.findAll()
+        const ultimoIDInterno = allDogsInternos.length + 1;
+        const dog = await Dog.create({
+            ...req.body, id: ultimoIDExterno + ultimoIDInterno
+        });
         console.log(dog);
         res.status(201).json(dog);
     } catch (error) {

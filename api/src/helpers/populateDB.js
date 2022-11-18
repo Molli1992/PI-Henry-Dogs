@@ -17,7 +17,10 @@ const populate = async function () {
                 return {
                     id: perro.id,
                     name: perro.name,
-                    altura: perro.height.metric,
+                    altura_min: perro.height.metric.split(" - ")[0] &&
+                        perro.height.metric.split(" - ")[0],
+                    altura_max: perro.height.metric.split(" - ")[1] &&
+                        perro.height.metric.split(" - ")[1],
                     peso_min: perro.weight.metric.split(" - ")[0] &&
                         perro.weight.metric.split(" - ")[0],
                     peso_max: perro.weight.metric.split(" - ")[1] &&

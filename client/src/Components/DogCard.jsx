@@ -60,8 +60,13 @@ export default function DogCard() {
                             </li>
 
                             <li>
-                                <span>Altura: </span>
-                                {dog[0].altura}
+                                <span>Altura min: </span>
+                                {dog[0].altura_min}
+                            </li>
+
+                            <li>
+                                <span>Altura max: </span>
+                                {dog[0].altura_max}
                             </li>
 
                             <li>
